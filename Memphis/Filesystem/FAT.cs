@@ -6,11 +6,12 @@ using Memphis.Interface;
 
 namespace Memphis.Filesystem
 {
-    class FAT : IFilesystem
+    class FAT : IFilesystem, IFeature
     {
+        FeatureInfo feature;
         public static bool isLoaded = false;
 
-        public FAT()
+        public void Load()
         {
             if (!isLoaded)
             {
@@ -18,6 +19,19 @@ namespace Memphis.Filesystem
                 _fs = new CosmosVFS();
                 VFSManager.RegisterVFS(_fs);
             }
+        }
+
+        public void Work()
+        {
+
+        }
+
+        public FAT()
+        {
+            Load();
+            feature.FeatureDescription = "The FAT filesystem.";
+            feature.FeatureName = "FAT";
+            feature.FeatureVersion = "0.0.1";
         }
 
         public string GetCurrentDirectory()
@@ -53,6 +67,11 @@ namespace Memphis.Filesystem
                 _currentDir = path;
                 return;
             }
+        }
+
+        public FeatureInfo GetInfo()
+        {
+            return feature;
         }
     }
 }

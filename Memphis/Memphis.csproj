@@ -40,7 +40,18 @@
     <Reference Include="Cosmos.Debug.Kernel, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5ae71220097cb983, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\Cd.cs" />
+    <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\CommandManager.cs" />
+    <Compile Include="Commands\Dir.cs" />
+    <Compile Include="Commands\Echo.cs" />
+    <Compile Include="Commands\Reboot.cs" />
+    <Compile Include="Exceptions\FeatureNotFoundException.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Features.cs" />
     <Compile Include="Filesystem\FAT.cs" />
+    <Compile Include="Interface\IExecutable.cs" />
+    <Compile Include="Interface\IFeature.cs" />
     <Compile Include="Interface\IFilesystem.cs" />
     <Compile Include="Interface\IShell.cs" />
     <Compile Include="Kernel.cs" />

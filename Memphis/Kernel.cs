@@ -1,23 +1,24 @@
-﻿using Memphis.Interface;
+﻿using Memphis.Shell;
+using Memphis.Commands;
 using Memphis.Filesystem;
-using Memphis.Shell;
 
 namespace Memphis
 {
     public class Kernel : Cosmos.System.Kernel
     {
-        IShell shell;
+        public static Features features = new Features();
+
 
         protected override void BeforeRun()
         {
-            shell = new DefaultShell();
-            shell.SetFilesystem(new FAT());
-            shell.GetFilesystem().SetCurrentDirectory("0:\\");
+            features.AddFeature(new CommandManager());
+            features.AddFeature(new FAT());
+            features.AddFeature(new DefaultShell());
         }
 
         protected override void Run()
         {
-            shell.DisplayShell();
+            features["Default Shell"].Work();
         }
     }
 }

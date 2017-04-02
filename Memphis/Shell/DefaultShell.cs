@@ -1,19 +1,28 @@
 ﻿using System;
-using System.IO;
-using static System.Console;
 
-using Cosmos.System;
 using Memphis.Interface;
+using Memphis.Commands;
+using Memphis.Filesystem;
+
+using static System.Console;
 
 namespace Memphis.Shell
 {
-    public class DefaultShell : IShell
+    public class DefaultShell : IShell, IFeature
     {
         IFilesystem filesystem;
+        FeatureInfo feature;
 
         public void SetFilesystem(IFilesystem fs)
         {
             filesystem = fs;
+        }
+
+        public DefaultShell()
+        {
+            feature.FeatureName = "Default Shell";
+            feature.FeatureDescription = "The default shell for Memphis.";
+            feature.FeatureVersion = "0.0.1";
         }
 
         public IFilesystem GetFilesystem()
@@ -23,39 +32,17 @@ namespace Memphis.Shell
 
         public void Interpret(string commandString)
         {
-            string lower = commandString.ToLower();
-            if (lower.StartsWith("reboot"))
-            {
-                Power.Reboot();
-            }
-            else if (lower.StartsWith("echo "))
-            {
-                WriteLine(commandString.Remove(0, 5));
-            }
-            else if (lower.StartsWith("dir") || lower.StartsWith("ls"))
-            {
-                foreach (var dir in Directory.GetDirectories(filesystem.GetCurrentDirectory()))
-                {
-                    Interpret("echo [DIR] " + dir);
-                }
-                foreach (var file in Directory.GetFiles(filesystem.GetCurrentDirectory()))
-                {
-                    Interpret("echo " + file);
-                }
+            string[] lexed = commandString.Split(' '); // Bad way to split the arguments, but eh..
 
-            }
-            else if (lower.StartsWith("cd "))
-            {
-                string dir = commandString.Remove(0, 3);
-                if (dir == "..")
-                {
-                    filesystem.SetCurrentDirectory(Directory.GetParent(filesystem.GetCurrentDirectory()).FullName);
-                }
-                else
-                {
-                    filesystem.SetCurrentDirectory(dir);
-                }
-            }
+            // TODO: Implement a proper lexer to split the arguments.
+
+            string command = lexed[0];
+            string[] args = new string[lexed.Length > 1 ? lexed.Length - 1 : 0];
+
+            for (int i = 1; i < lexed.Length; i++)
+                args[i - 1] = lexed[i];
+
+            ((CommandManager)Kernel.features["Command Manager"]).ExecuteCommand(command, args, this);
         }
 
         public void DisplayShell()
@@ -73,6 +60,22 @@ namespace Memphis.Shell
                 WriteLine(ex.ToString());
                 ForegroundColor = ConsoleColor.White;
             }
+        }
+
+        public FeatureInfo GetInfo()
+        {
+            return feature;
+        }
+
+        public void Work()
+        {
+            DisplayShell();
+        }
+
+        public void Load()
+        {
+            SetFilesystem((FAT)Kernel.features["FAT"]);
+            GetFilesystem().SetCurrentDirectory("0:\\");
         }
     }
 }
