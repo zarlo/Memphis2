@@ -7,5 +7,6 @@
         IFilesystem GetFilesystem();
         void SetFilesystem(IFilesystem fs);
         void Interpret(string command);
+        char[] GetOutput();
     }
 }

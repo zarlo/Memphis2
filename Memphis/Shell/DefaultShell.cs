@@ -4,14 +4,14 @@ using Memphis.Interface;
 using Memphis.Commands;
 using Memphis.Filesystem;
 
-using static System.Console;
-
 namespace Memphis.Shell
 {
     public class DefaultShell : IShell, IFeature
     {
         IFilesystem filesystem;
         FeatureInfo feature;
+
+        internal string output;
 
         public void SetFilesystem(IFilesystem fs)
         {
@@ -47,19 +47,9 @@ namespace Memphis.Shell
 
         public void DisplayShell()
         {
-            try
-            {
-                Write($"user@memphis:{filesystem.GetCurrentDirectory()}$ ");
-                string cmd = ReadLine();
+                Interpret($"echo user@memphis:{filesystem.GetCurrentDirectory()}$ /b");
+                string cmd = Console.ReadLine();
                 Interpret(cmd);
-            }
-            catch (Exception ex)
-            {
-                ForegroundColor = ConsoleColor.Red;
-                WriteLine("Kernel error:");
-                WriteLine(ex.ToString());
-                ForegroundColor = ConsoleColor.White;
-            }
         }
 
         public FeatureInfo GetInfo()
@@ -72,8 +62,16 @@ namespace Memphis.Shell
             DisplayShell();
         }
 
+        public char[] GetOutput()
+        {
+            char[] outp = output.ToCharArray();
+            output = "";
+            return outp;
+        }
+
         public void Load()
         {
+            output = "";
             SetFilesystem((FAT)Kernel.features["FAT"]);
             GetFilesystem().SetCurrentDirectory("0:\\");
         }

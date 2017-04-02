@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Memphis.Shell;
 
 namespace Memphis.Commands
 {
@@ -12,11 +12,18 @@ namespace Memphis.Commands
             }
         }
 
-        // TODO: Implement shell text buffer and make echo write to it.
-
         public override void Main(string[] args)
         {
-            Console.WriteLine(args.Join(" "));
+            string output = args.Join(" ");
+            if (output.EndsWith("/b"))
+            {
+                output = output.Substring(0,output.Length - 2);
+            } else
+            {
+                output += "\n";
+            }
+            ((DefaultShell)currentShell).output += output;
+            Kernel.Call((byte)Kernel.Calls.UpdateShellWriter);
         }
     }
 }
