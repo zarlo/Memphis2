@@ -23,6 +23,7 @@ namespace Memphis.Commands
             commands.Add(new Dir());
             commands.Add(new Echo());
             commands.Add(new Reboot());
+            commands.Add(new Clear());
         }
 
         public void RegisterCommand(Command command)

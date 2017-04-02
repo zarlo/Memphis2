@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\Cd.cs" />
+    <Compile Include="Commands\Clear.cs" />
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\CommandManager.cs" />
     <Compile Include="Commands\Dir.cs" />
