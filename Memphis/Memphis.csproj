@@ -40,9 +40,12 @@
     <Reference Include="Cosmos.Debug.Kernel, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5ae71220097cb983, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandDispatcher.cs" />
+    <Compile Include="FATFilesystem.cs" />
+    <Compile Include="Interfaces\IFilesystem.cs" />
+    <Compile Include="Interfaces\IShell.cs" />
     <Compile Include="Kernel.cs" />
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Shell.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
