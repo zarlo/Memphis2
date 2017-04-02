@@ -40,9 +40,26 @@
     <Reference Include="Cosmos.Debug.Kernel, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5ae71220097cb983, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandDispatcher.cs" />
+    <Compile Include="Commands\Cd.cs" />
+    <Compile Include="Commands\Clear.cs" />
+    <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\CommandManager.cs" />
+    <Compile Include="Commands\Dir.cs" />
+    <Compile Include="Commands\Echo.cs" />
+    <Compile Include="Commands\Ls.cs" />
+    <Compile Include="Commands\Reboot.cs" />
+    <Compile Include="Exceptions\FeatureNotFoundException.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Features.cs" />
+    <Compile Include="Filesystem\FAT.cs" />
+    <Compile Include="Interface\IExecutable.cs" />
+    <Compile Include="Interface\IFeature.cs" />
+    <Compile Include="Interface\IFilesystem.cs" />
+    <Compile Include="Interface\IShell.cs" />
     <Compile Include="Kernel.cs" />
-    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shell\DefaultShell.cs" />
+    <Compile Include="Shell\ShellWriter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
