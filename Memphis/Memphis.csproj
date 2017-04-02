@@ -45,6 +45,7 @@
     <Compile Include="Commands\CommandManager.cs" />
     <Compile Include="Commands\Dir.cs" />
     <Compile Include="Commands\Echo.cs" />
+    <Compile Include="Commands\Ls.cs" />
     <Compile Include="Commands\Reboot.cs" />
     <Compile Include="Exceptions\FeatureNotFoundException.cs" />
     <Compile Include="Extensions.cs" />
