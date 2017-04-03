@@ -49,7 +49,10 @@
     <Compile Include="Commands\Ls.cs" />
     <Compile Include="Commands\Reboot.cs" />
     <Compile Include="Exceptions\FeatureNotFoundException.cs" />
-    <Compile Include="Extensions.cs" />
+    <Compile Include="Extensions\File.cs" />
+    <Compile Include="Extensions\Join.cs" />
+    <Compile Include="Extensions\Lex.cs" />
+    <Compile Include="Extensions\Remove.cs" />
     <Compile Include="Features.cs" />
     <Compile Include="Filesystem\FAT.cs" />
     <Compile Include="Interface\IExecutable.cs" />

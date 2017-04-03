@@ -1,4 +1,5 @@
 ﻿using Memphis.Shell;
+using Memphis.Extensions;
 
 namespace Memphis.Commands
 {
