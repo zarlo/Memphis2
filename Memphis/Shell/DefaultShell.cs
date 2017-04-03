@@ -32,7 +32,24 @@ namespace Memphis.Shell
 
         public void Interpret(string commandString)
         {
-            string[] lexed = commandString.Split(' '); // Bad way to split the arguments, but eh..
+            List<string> tokens = new List<string> { "" };
+            foreach (char c in s)
+            {
+
+                if (c == '"') { isinquotes = !isinquotes; }
+                else if (c == split && isinquotes == false) { tokens.Add(""); }
+                else { tokens[tokens.Count - 1] += c; }
+
+            }
+            //
+            // hello world "how are you"
+            // this will out put
+            // hello
+            // world
+            // how are you
+            
+            
+            string[] lexed = tokens.ToArray(); 
 
             // TODO: Implement a proper lexer to split the arguments.
 
