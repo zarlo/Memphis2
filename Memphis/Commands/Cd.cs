@@ -1,4 +1,4 @@
-﻿using System.IO;
+﻿using Memphis.Extensions;
 
 namespace Memphis.Commands
 {
@@ -17,7 +17,7 @@ namespace Memphis.Commands
             string dir = args.Join(" ");
             if (dir == "..")
             {
-                currentShell.GetFilesystem().SetCurrentDirectory(Directory.GetParent(currentShell.GetFilesystem().GetCurrentDirectory()).FullName);
+                currentShell.GetFilesystem().SetCurrentDirectory(currentShell.GetFilesystem().GetCurrentDirectory().Up());
             }
             else
             {
