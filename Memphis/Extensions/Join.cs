@@ -1,6 +1,6 @@
-﻿namespace Memphis
+﻿namespace Memphis.Extensions
 {
-    public static class Extensions
+    public static partial class Extension
     {
         public static string Join(this string[] args, string join)
         {
